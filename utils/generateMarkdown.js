@@ -17,8 +17,9 @@
 // `;
 // }
 
-function generateMarkdown(responses, githubLink) {
-  `# Proyect Name is: ${responses.title}
+function generateMarkdown(responses) {
+
+  return `# Proyect Name is: ${responses.title}
   
   ## Table of contents
   1. [Description](#description)
@@ -51,7 +52,7 @@ function generateMarkdown(responses, githubLink) {
   If you have any questions, please contact me to the information listed below.
   
   *Email: ${responses.email}
-  *GitHub: ${githubLink}
+  *GitHub: [${responses.github}](https://github.com/${responses.github})
   
   `
   }

@@ -4,12 +4,13 @@ const fs = require('fs');
 const githubInfo = require('./github');
 const generateMarkdown = require ('./utils/generateMarkdown');
 const util = require('util');
-// const githubUrl = "https://api.github.com/"
+const path = require('path');
+// const githubUrl = "github.com/"
 
 
 // TODO: Create an array of questions for user input
-function promptUser() {
-    inquirer.prompt([
+const questions = [
+
         {
             type: 'input',
             message: 'What is the title of the project?',
@@ -65,12 +66,10 @@ function promptUser() {
             name: 'email',
             validate: (value) => { if (value) { return true; } else { return "Enter email to continue"; } },
         },
-    ]);
-}
+    ]
 
 
-
-// const githubCompleteUrl = "https://api.github.com/" + ${github};
+// const githubCompleteUrl = "https://github.com/" + ${github};
 
 
 
@@ -134,21 +133,30 @@ const writeFileAsync = util.promisify(writeInFile);
 
 // TODO: Create a function to initialize app
 async function init() {
-    try{
-        const responses = await inquirer.prompt(promptUser);
-        console.log("List of responses: ", responses);
+    // try{
+        inquirer.prompt(questions).then((responses) => {
+            console.log("List of responses: ", responses);
+            
+            // const githubLink = githubInfo.genLink(responses);
+            // const markdown = generateMarkdown(responses,githubLink);
+            fs.writeFile('SampleREADME.md', generateMarkdown(responses), (err) => {
+                if(err) throw err
 
-        const githubLink = await githubInfo.genLink(responses);
-        console.log("Your github link is: ", githubLink);
+            });
+        })
 
-        const markdown = generateMarkdown(responses,githubLink);
-        console.log(markdown);
 
-        await writeFileAsync('SampleREADME.md', markdown);
-    } catch (error) {
-        console.log(error);
-    }
-}; 
+    //     const githubLink = await githubInfo.genLink(responses);
+    //     console.log("Your github link is: ", githubLink);
+
+    //     const markdown = generateMarkdown(responses,githubLink);
+    //     console.log(markdown);
+
+    //     await writeFileAsync('SampleREADME.md', markdown);
+    // } catch (error) {
+    //     console.log(error);
+    // }
+}
 
 // Function call to initialize app
 init();
