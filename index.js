@@ -5,7 +5,7 @@ const githubInfo = require('./github');
 const generateMarkdown = require ('./utils/generateMarkdown');
 const util = require('util');
 const path = require('path');
-// const githubUrl = "github.com/"
+
 
 
 // TODO: Create an array of questions for user input
@@ -68,11 +68,6 @@ const questions = [
         },
     ]
 
-
-// const githubCompleteUrl = "https://github.com/" + ${github};
-
-
-
 // const template = ({title, description, installation, usage, license, credits, tests, github, email,}) =>
 // `# Proyect Name is: ${title}
 
@@ -121,7 +116,7 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeInFile (fileName, data){
-    fs.writeFile(fileName,data, err => {
+    fs.writeFile(fileName, data, err => {
         if (err) {
             return console.log(error);
         } else {
@@ -145,17 +140,6 @@ async function init() {
             });
         })
 
-
-    //     const githubLink = await githubInfo.genLink(responses);
-    //     console.log("Your github link is: ", githubLink);
-
-    //     const markdown = generateMarkdown(responses,githubLink);
-    //     console.log(markdown);
-
-    //     await writeFileAsync('SampleREADME.md', markdown);
-    // } catch (error) {
-    //     console.log(error);
-    // }
 }
 
 // Function call to initialize app

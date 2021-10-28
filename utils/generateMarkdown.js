@@ -18,43 +18,70 @@
 // }
 
 function generateMarkdown(responses) {
+  //create table of contents conditionaly based on our client responses
+  let tableContents = `## Table of contents`;
 
-  return `# Proyect Name is: ${responses.title}
+  if (responses.description !=='') {
+    tableContents += `1. [Description](#description)`
+  };
+  if (responses.installation !=='') {
+    tableContents += `2. [Installation](#installation)`
+  };
+  if (responses.usage !=='') {
+    tableContents += `3. [Usage](#usage)`
+  };
+  if (responses.license !=='') {
+    tableContents += `4. [License](#license)`
+  };
+  if (responses.credits !=='') {
+    tableContents += `5. [Credits](#credits)`
+  };
+  if (responses.tests !=='') {
+    tableContents += `6. [Tests](#tests)`
+  };
+  if (responses.questions !=='') {
+    tableContents += `7. [Questions](#questions)`
+  };
+
+  //create a markdown (including the project name) for the portions that were selected above and that we'll include i out readme.md
+  let selectedContent;
+
+  if (responses.title !==''){
+    selectedContent += `# Proyect Name is: <a name="title">${responses.title}</a>`
+  };
+
+  `---`
+
+  selectedContent += tableContents;
+    
+  `## Project description <a name="description">${responses.description}</a>
   
-  ## Table of contents
-  1. [Description](#description)
-  2. [Installation](#installation)
-  3. [Usage](#usage)
-  4. [License](#license)
-  5. [Credits](#credits)
-  6. [Tests](#tests)
-  7. [Questions](#questions)
+  ---
+  ## Installation <a name="installation">${responses.installation}</a>
   
-  ## Project description <a name="description"></a>
-  ${responses.description}
+  ---
+  ## Usage <a name="usage">${responses.usage}</a>
   
-  ## Installation <a name="installation"></a>
-  ${responses.installation}
+  ---
+  ## License <a name="license">${responses.license}</a>
   
-  ## Usage <a name="usage"></a>
-  ${responses.usage}
+  ---
+  ## Credits <a name="credits">${responses.credits}</a>
   
-  ## License <a name="license"></a>
-  ${responses.license}
+  ---
+  ## Tests <a name="tests">${responses.tests}</a>
   
-  ## Credits <a name="credits"></a>
-  ${responses.credits}
-  
-  ## Tests <a name="tests"></a>
-  ${responses.tests}
-  
-  ## Questions <a name="questions"></a>
+  ---
+  ## Questions <a name="questions">
   If you have any questions, please contact me to the information listed below.
   
   *Email: ${responses.email}
   *GitHub: [${responses.github}](https://github.com/${responses.github})
-  
+  </a>
+  ---
   `
+  return selectedContent;
+
   }
   module.exports = generateMarkdown;
   
